@@ -7,8 +7,10 @@ require_relative 'encryptor_file'
 class Decryptor
 
   def load(from_file)
+    puts "What is the key?"
+    input = gets.chomp
     File.readlines(from_file).map do |line|
-      enigma = Enigma.new("#{line}")
+      enigma = Enigma.new("#{line}", Key.new("#{input}"))
       key = Key.new.generate
       decrypted_message = enigma.decrypt
       date = Date.new.today
@@ -19,6 +21,9 @@ class Decryptor
   end
 
 end
+
+
+
 
 decryptor = Decryptor.new
 
